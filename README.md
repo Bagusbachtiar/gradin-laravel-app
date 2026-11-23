@@ -1,58 +1,43 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Courier Master Data API (Laravel 13)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Backend REST API sederhana untuk pengelolaan master data **Kurir (Courier)** menggunakan **Laravel 13** dengan pola **MVC + Repository Pattern**.
 
-## About Laravel
+## Catatan Pengerjaan
+- **Arsitektur & Standar Kode:** Menggunakan `CourierRepository` yang terpisah dari `CourierController`, mengikuti standar dan pola kode yang biasa saya terapkan saat magang (internship) sebelumnya agar alur kode sederhana, rapi, dan mudah di-debug.
+- **Referensi & Pembelajaran:** Karena sebelumnya terbiasa dengan Laravel 8, saya melihat kembali struktur project lama saya sebagai gambaran penulisan kode. Selain itu, karena biasanya saya menguji fitur lewat tampilan frontend sederhana, penulisan **Feature Test menggunakan Model Factory** adalah hal baru bagi saya dan saya dibantu AI untuk menyusun bagian factory test tersebut.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Endpoint API
+- `GET /couriers` — List kurir (pagination, default sort `name`, `?sort_by=created_at`, `?search=budi+agung`, `?level=2,3`)
+- `POST /couriers` — Tambah data kurir
+- `GET /couriers/{id}` — Detail seluruh data kurir
+- `PUT /couriers/{id}` — Update data kurir
+- `DELETE /couriers/{id}` — Hapus data kurir
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
+## Automated Test
+Jalankan perintah berikut untuk menguji seluruh fitur dan validasi database:
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+php artisan test
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### Hasil Test
+```text
+   PASS  Tests\Unit\ExampleTest
+  ✓ that true is true
 
-## Contributing
+   PASS  Tests\Feature\CourierTest
+  ✓ index returns paginated couriers sorted by name by default                   0.28s  
+  ✓ index can override sort by registration date                                 0.01s  
+  ✓ index can search multi word name                                             0.01s  
+  ✓ index can filter by levels                                                   0.01s  
+  ✓ show returns all courier data                                                0.01s  
+  ✓ store validates and saves courier to database                                0.03s  
+  ✓ update validates and updates courier in database                             0.01s  
+  ✓ destroy deletes courier from database                                        0.01s  
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+   PASS  Tests\Feature\ExampleTest
+  ✓ the application returns a successful response                                0.02s  
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+  Tests:    10 passed (32 assertions)
+  Duration: 0.68s
+```
