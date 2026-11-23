@@ -2,23 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\Courier;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends Factory<Courier>
- */
 class CourierFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            //
+            'code'      => 'KUR-' . fake()->unique()->numerify('####'),
+            'name'      => fake()->name(),
+            'email'     => fake()->unique()->safeEmail(),
+            'phone'     => '08' . fake()->unique()->numerify('##########'),
+            'level'     => fake()->numberBetween(1, 5),
+            'is_active' => true,
         ];
     }
 }
