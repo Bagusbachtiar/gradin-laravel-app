@@ -1,10 +1,11 @@
 # Courier Master Data API (Laravel 13)
 
-Backend REST API sederhana untuk pengelolaan master data **Kurir (Courier)** menggunakan **Laravel 13** dengan pola **MVC + Repository Pattern**.
+Backend REST API sederhana untuk pengelolaan master data Kurir menggunakan Laravel 13 dengan pola MVC + Repository Pattern.
 
 ## Catatan Pengerjaan
-- **Arsitektur & Standar Kode:** Menggunakan `CourierRepository` yang terpisah dari `CourierController`, mengikuti standar dan pola kode yang biasa saya terapkan saat magang (internship) sebelumnya agar alur kode sederhana, rapi, dan mudah di-debug.
-- **Referensi & Pembelajaran:** Karena sebelumnya terbiasa dengan Laravel 8, saya melihat kembali struktur project lama saya sebagai gambaran penulisan kode. Selain itu, karena biasanya saya menguji fitur lewat tampilan frontend sederhana, penulisan **Feature Test menggunakan Model Factory** adalah hal baru bagi saya dan saya dibantu AI untuk menyusun bagian factory test tersebut.
+- Arsitektur & Standar Kode: Menerapkan Repository Pattern dengan memisahkan `CourierRepository` dari `CourierController` sesuai standar kode saat magang  sebelumnya. `CourierRepository` bertindak sebagai business & data access layer yang menangani validasi, query, dan manipulasi database, sementara `CourierController` berperan sebagai presentation/HTTP layer yang menjembatani *request* dan *response*. Karena project ini dibuat tanpa frontend (UI), `CourierController` langsung mengembalikan JSON response beserta HTTP status code yang sesuai (`200`, `201`, `404`, `422`).
+
+-Referensi & Pembelajaran: Karena sebelumnya terbiasa dengan Laravel 8, saya melihat kembali struktur project lama saya sebagai gambaran penulisan kode. Selain itu, karena biasanya saya menguji fitur lewat tampilan frontend sederhana, penulisan **Feature Test menggunakan Model Factory** adalah hal baru bagi saya dan saya dibantu AI untuk menyusun bagian factory test tersebut.
 
 
 ## Endpoint API
